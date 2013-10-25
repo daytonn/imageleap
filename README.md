@@ -1,4 +1,4 @@
-Unicornleap
+Imageleap
 ===========
 
 A reimplementaion of jgdavey/unicornleap that allows you to pass an arbitrary image path.

@@ -171,16 +171,9 @@ int main (int argc, char * argv[]) {
         }
     } while (next_option != -1);
 
-    if (image == NULL || strcmp(image, "imageleap")) {
-        const char *homeVar = "HOME";
-        const char *homeDir = getenv(homeVar);
-        const char* imagePath = "/.imageleap/unicorn.png";
-
-        char* fullImagePath;
-        fullImagePath = malloc(strlen(homeDir)+strlen(imagePath));
-        strcpy(fullImagePath, homeDir);
-        strcat(fullImagePath, imagePath);
-        image = fullImagePath;
+    if (image == NULL) {
+        printf("ERROR: You must pass an image file with -i\n");
+        exit(128);
     }
 
     // Coerce string to double

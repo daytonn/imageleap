@@ -171,7 +171,7 @@ int main (int argc, char * argv[]) {
         }
     } while (next_option != -1);
 
-    if (image == NULL) {
+    if (image == NULL || strcmp(image, "imageleap")) {
         const char *homeVar = "HOME";
         const char *homeDir = getenv(homeVar);
         const char* imagePath = "/.imageleap/unicorn.png";

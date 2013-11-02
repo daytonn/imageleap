@@ -107,6 +107,12 @@ void animateImage (const char* imagePathString) {
     NSWindow *window = createTransparentWindow(screen);
     NSView *view = [[NSView alloc] initWithFrame:screen];
     NSString* imagePath = [NSString stringWithFormat:@"%s" , imagePathString];
+    NSString *folder;
+    if ([imagePath isEqualToString: @"(null)"]) {
+        folder = [NSHomeDirectory() stringByAppendingPathComponent:@".imageleap"];
+        imagePath = [folder stringByAppendingPathComponent:@"unicorn.png"];
+        imagePathString = [imagePath UTF8String];
+    }
     CGSize imageSize = getImageSize(imagePath);
     CGImageRef cgimage = createCGImage(imagePath);
     CGMutablePathRef arcPath;
@@ -141,8 +147,6 @@ int main (int argc, char * argv[]) {
     char* s = NULL;
     char* i = NULL;
 
-    NSString *folder;
-    NSString *imagePath;
     const char* image;
     int verbose = 0, num = 1;
     double sec = 2.0;
@@ -178,18 +182,18 @@ int main (int argc, char * argv[]) {
     if (! sec > 0.0) sec = 2.0;
     seconds = sec;
 
-
-    if (image == NULL) {
-        folder = [NSHomeDirectory() stringByAppendingPathComponent:@".imageleap"];
-        imagePath = [folder stringByAppendingPathComponent:@"unicorn.png"];
-        image = [imagePath UTF8String];
-    }
-
     if (verbose) {
         printf("Seconds: %f\n", seconds);
-        printf("Image: %s\n", image);
+        if (image == NULL) {
+            printf("Image: ~/.imageleap/unicorn.png\n");
+        }
+        else {
+            printf("Image: %s\n", image);
+        }
     }
 
     animateImage(image);
+
     return 0;
 }
+

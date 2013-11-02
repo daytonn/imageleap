@@ -178,15 +178,16 @@ int main (int argc, char * argv[]) {
     if (! sec > 0.0) sec = 2.0;
     seconds = sec;
 
-    if (verbose) {
-        printf("Seconds: %f\n", seconds);
-        printf("Image: %s\n", image);
-    }
 
     if (image == NULL) {
         folder = [NSHomeDirectory() stringByAppendingPathComponent:@".imageleap"];
         imagePath = [folder stringByAppendingPathComponent:@"unicorn.png"];
         image = [imagePath UTF8String];
+    }
+
+    if (verbose) {
+        printf("Seconds: %f\n", seconds);
+        printf("Image: %s\n", image);
     }
 
     animateImage(image);

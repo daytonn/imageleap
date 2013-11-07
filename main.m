@@ -171,11 +171,6 @@ int main (int argc, char * argv[]) {
         }
     } while (next_option != -1);
 
-    if (image == NULL) {
-        printf("ERROR: You must pass an image file with -i\n");
-        exit(128);
-    }
-
     // Coerce string to double
     if (NULL != s) sec = strtod(s, NULL);
     if (! sec > 0.0) sec = 2.0;
@@ -186,7 +181,12 @@ int main (int argc, char * argv[]) {
         printf("Image: %s\n", image);
     }
 
-    animateImage(image);
+    if (image == NULL) {
+        print_usage(stdout, 0);
+    }
+    else {
+        animateImage(image);
+    }
 
     return 0;
 }
